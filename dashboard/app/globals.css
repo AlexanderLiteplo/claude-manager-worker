@@ -1,0 +1,394 @@
+@import "tailwindcss";
+
+:root {
+  /* Anime theme light mode */
+  --background: #fef7f7;
+  --foreground: #171717;
+  --primary: #f43f5e;
+  --secondary: #0ea5e9;
+  --accent: #eab308;
+  --success: #4ade80;
+  --error: #f87171;
+  --warning: #fbbf24;
+  --info: #60a5fa;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Anime theme dark mode */
+    --background: #0f0f23;
+    --foreground: #ededed;
+    --primary: #f43f5e;
+    --secondary: #0ea5e9;
+    --accent: #eab308;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ============================================
+   ANIME KEYFRAME ANIMATIONS
+   ============================================ */
+
+/* Bounce animation */
+@keyframes anime-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(-15px);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+/* Pulse glow animation */
+@keyframes anime-pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+/* Shine sweep animation */
+@keyframes anime-shine {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Float animation */
+@keyframes anime-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  75% {
+    transform: translateY(-5px) rotate(-2deg);
+  }
+}
+
+/* Sparkle animation */
+@keyframes anime-sparkle {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+/* Wiggle animation */
+@keyframes anime-wiggle {
+  0%, 100% {
+    transform: rotate(-3deg);
+  }
+  50% {
+    transform: rotate(3deg);
+  }
+}
+
+/* Heart beat animation */
+@keyframes anime-heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.1);
+  }
+}
+
+/* Glow pulse animation */
+@keyframes anime-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px currentColor, 0 0 10px currentColor;
+  }
+  50% {
+    box-shadow: 0 0 20px currentColor, 0 0 30px currentColor;
+  }
+}
+
+/* Slide in from bottom */
+@keyframes anime-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide in from right */
+@keyframes anime-slide-left {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Pop in animation */
+@keyframes anime-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Rainbow border animation */
+@keyframes anime-rainbow {
+  0% {
+    border-color: #f43f5e;
+  }
+  16% {
+    border-color: #eab308;
+  }
+  33% {
+    border-color: #4ade80;
+  }
+  50% {
+    border-color: #0ea5e9;
+  }
+  66% {
+    border-color: #a855f7;
+  }
+  83% {
+    border-color: #f43f5e;
+  }
+  100% {
+    border-color: #f43f5e;
+  }
+}
+
+/* Typing dots animation */
+@keyframes anime-typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Particle float animation */
+@keyframes anime-particle {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Spin animation */
+@keyframes anime-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================
+   ANIMATION UTILITY CLASSES
+   ============================================ */
+
+.animate-anime-bounce {
+  animation: anime-bounce 1s ease-in-out infinite;
+}
+
+.animate-anime-pulse {
+  animation: anime-pulse 2s ease-in-out infinite;
+}
+
+.animate-anime-shine {
+  animation: anime-shine 2s linear infinite;
+}
+
+.animate-anime-float {
+  animation: anime-float 3s ease-in-out infinite;
+}
+
+.animate-anime-sparkle {
+  animation: anime-sparkle 1.5s ease-in-out infinite;
+}
+
+.animate-anime-wiggle {
+  animation: anime-wiggle 0.5s ease-in-out infinite;
+}
+
+.animate-anime-heartbeat {
+  animation: anime-heartbeat 1s ease-in-out infinite;
+}
+
+.animate-anime-glow {
+  animation: anime-glow 2s ease-in-out infinite;
+}
+
+.animate-anime-pop {
+  animation: anime-pop 0.3s ease-out;
+}
+
+.animate-anime-rainbow {
+  animation: anime-rainbow 3s linear infinite;
+}
+
+/* ============================================
+   CUSTOM SCROLLBAR (Anime Style)
+   ============================================ */
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 5px;
+}
+
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-track {
+    background: #1a1a2e;
+  }
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #f43f5e 0%, #a855f7 100%);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #e11d48 0%, #9333ea 100%);
+}
+
+/* ============================================
+   GRADIENT TEXT UTILITY
+   ============================================ */
+
+.text-gradient-sakura {
+  background: linear-gradient(135deg, #f43f5e 0%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-ocean {
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-sunset {
+  background: linear-gradient(135deg, #f97316 0%, #f43f5e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-forest {
+  background: linear-gradient(135deg, #4ade80 0%, #14b8a6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   GLASS MORPHISM UTILITIES
+   ============================================ */
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass-dark {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   NEON GLOW EFFECTS
+   ============================================ */
+
+.neon-pink {
+  box-shadow: 0 0 5px #f43f5e, 0 0 10px #f43f5e, 0 0 20px #f43f5e;
+}
+
+.neon-blue {
+  box-shadow: 0 0 5px #0ea5e9, 0 0 10px #0ea5e9, 0 0 20px #0ea5e9;
+}
+
+.neon-purple {
+  box-shadow: 0 0 5px #a855f7, 0 0 10px #a855f7, 0 0 20px #a855f7;
+}
+
+.neon-green {
+  box-shadow: 0 0 5px #4ade80, 0 0 10px #4ade80, 0 0 20px #4ade80;
+}
+
+.neon-gold {
+  box-shadow: 0 0 5px #eab308, 0 0 10px #eab308, 0 0 20px #eab308;
+}
+
+/* ============================================
+   SELECTION STYLES
+   ============================================ */
+
+::selection {
+  background: rgba(244, 63, 94, 0.3);
+  color: inherit;
+}
+
+::-moz-selection {
+  background: rgba(244, 63, 94, 0.3);
+  color: inherit;
+}

@@ -1,0 +1,51 @@
+# State files
+.state/
+
+# Logs
+logs/
+*.log
+
+# Output (generated during runs)
+output/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+
+# Python (if generated code is Python)
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+venv/
+env/
+.env
+
+# Node (if generated code is Node)
+node_modules/
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Dashboard (Next.js)
+dashboard/.next/
+dashboard/out/
+dashboard/.vercel
+dashboard/.turbo
+dashboard/.env.local
+dashboard/.env
+
+# Environment variables (sensitive)
+.env
+.env.local
+.env.*.local
+
+# Keep empty directories
+!.gitkeep
