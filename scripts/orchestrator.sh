@@ -316,12 +316,17 @@ main() {
             fi
             echo ""
 
-            # Check for PRDs
-            local prd_count=$(find "$PROJECT_ROOT/prds" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
-            if [[ $prd_count -eq 0 ]]; then
-                echo -e "${RED}Error: No PRDs found in $PROJECT_ROOT/prds/${NC}"
-                echo -e "Please add at least one .md file with your PRD"
-                exit 1
+            # Check for PRDs or tasks.json
+            if [[ -f "$PROJECT_ROOT/prds/tasks.json" ]]; then
+                echo -e "${GREEN}✓ Using task-based system (tasks.json)${NC}"
+            else
+                local prd_count=$(find "$PROJECT_ROOT/prds" -name "*.md" 2>/dev/null | wc -l | tr -d ' ')
+                if [[ $prd_count -eq 0 ]]; then
+                    echo -e "${RED}Error: No PRDs found in $PROJECT_ROOT/prds/${NC}"
+                    echo -e "Please add tasks.json or at least one .md PRD file"
+                    exit 1
+                fi
+                echo -e "${GREEN}✓ Found $prd_count PRD file(s)${NC}"
             fi
 
             echo -e "${GREEN}Found $prd_count PRD(s) to process${NC}"

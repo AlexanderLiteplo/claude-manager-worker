@@ -108,7 +108,7 @@ mark_task_in_progress() {
 
     jq --arg id "$task_id" \
        '(.tasks[] | select(.id == $id) | .status) = "in_progress" |
-        (.tasks[] | select(.id == $id) | .startedAt) = now | strftime("%Y-%m-%dT%H:%M:%SZ")' \
+        (.tasks[] | select(.id == $id) | .startedAt) = (now | strftime("%Y-%m-%dT%H:%M:%SZ"))' \
        "$TASKS_FILE" > "$TASKS_FILE.tmp" && mv "$TASKS_FILE.tmp" "$TASKS_FILE"
 }
 
@@ -117,7 +117,7 @@ mark_task_completed() {
 
     jq --arg id "$task_id" \
        '(.tasks[] | select(.id == $id) | .status) = "completed" |
-        (.tasks[] | select(.id == $id) | .completedAt) = now | strftime("%Y-%m-%dT%H:%M:%SZ")' \
+        (.tasks[] | select(.id == $id) | .completedAt) = (now | strftime("%Y-%m-%dT%H:%M:%SZ"))' \
        "$TASKS_FILE" > "$TASKS_FILE.tmp" && mv "$TASKS_FILE.tmp" "$TASKS_FILE"
 
     log_success "✓ Task $task_id completed!"
@@ -268,9 +268,23 @@ run_iteration() {
     log_info "Invoking Claude ($WORKER_MODEL)..."
 
     local output_file="$INSTANCE_ROOT/logs/iteration_${iteration}_task_${task_id}.md"
+    local prompt_file="$STATE_DIR/prompt_${iteration}.txt"
 
-    if ! echo "$prompt" | claude -m "$WORKER_MODEL" > "$output_file" 2>&1; then
-        log_error "Claude invocation failed"
+    # Save prompt to file
+    echo "$prompt" > "$prompt_file"
+
+    # Run Claude interactively (allows tool use) with prompt from file, bypass permissions
+    cd "$PROJECT_PATH" && echo "$prompt" | claude --model "$WORKER_MODEL" \
+        --dangerously-skip-permissions \
+        --add-dir "$PROJECT_PATH" \
+        --add-dir "$INSTANCE_ROOT" \
+        --add-dir "$STATE_DIR" \
+        > "$output_file" 2>&1
+
+    local claude_exit_code=$?
+
+    if [ $claude_exit_code -ne 0 ]; then
+        log_error "Claude invocation failed with exit code $claude_exit_code"
         return 1
     fi
 
